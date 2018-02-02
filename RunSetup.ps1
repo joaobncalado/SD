@@ -1,0 +1,18 @@
+﻿cd 'D:\Biblioteca\DropGoogle\IST\2016-2017\22-SDis\Proj\04\T13-Komparator';
+mvn clean install -DskipITs;
+cd .\supplier-ws;
+$PSCommand="mvn exec:java";
+(Start-Process powershell $PSCommand).WaitForExit();
+$PSCommand="mvn exec:java -D ws.i=2";
+(Start-Process powershell $PSCommand).WaitForExit();
+cd ..\mediator-ws;
+$PSCommand="mvn exec:java";
+(Start-Process powershell $PSCommand).WaitForExit();
+Start-Sleep -Seconds 20;
+$PSCommand="mvn exec:java -D ws.i=2";
+(start-process powershell $PSCommand).WaitForExit();
+Start-Sleep -Seconds 20;
+cd ..\mediator-ws-cli;
+$PSCommand="mvn verify -D test=BuyCartIT";
+(Start-Process powershell -ArgumentList '-noexit', $PSCommand);
+cd ..;
